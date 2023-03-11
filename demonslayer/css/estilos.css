@@ -1,0 +1,30 @@
+.header{
+   background-image:  linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/img/ds-colors.webp');
+    color:rgb(238,238,237);
+    border-bottom: 5px inset rgba(75,45,45);;
+}
+.container{
+    background-color: rgba(	75,45,45,1);
+    height: 100%;
+    color:rgb(238,238,237);
+}
+.left{
+    background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/img/ds-wll.webp'); 
+    height: 1200px;
+    margin: auto;
+    display: block;
+}
+.rigth{
+    background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/img/muzan.jpg');
+    height: 1200px;
+    background-repeat: repeat;
+    background-position-x: center;
+    margin: auto;
+    display: block;
+}
+.center{
+    border: 20px rgba(75,45,45) groove;
+border-collapse:separate;    
+background-color: rgba(34,32,31);
+    color:rgb(238,238,237);
+}
