@@ -1,12 +1,7 @@
-const express = require('express');
-const app = express();
-app.use(express.json());
+const express = require('express')
+const cors =require('cors')
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-  });
-  
+const app = express()
 const personajes=[
     {id:1,nombre:'Kagaya Ubuyashiki',alías:'Oyakata-sama',afiliacion:'Cuerpo de Exterminio de Demonios', familia:'Ubuyashiki', edad:23, genero:'Masculino',especie:'Humano', ocupacion:'Lider del cuerpo de exterminio de demonios',estilocombate:'',imagen:'/personajes/Kagaya.webp'},
     {id:2,nombre:'Hinaki Ubuyashiki',alías:'',afiliacion:'Cuerpo de Exterminio de Demonios', familia:'Ubuyashiki', edad:8, genero:'Masculino',especie:'Humano', ocupacion:'',estilocombate:'',imagen:'/personajes/Hinaki.webp'},
@@ -51,23 +46,54 @@ const personajes=[
     {id:41,nombre:'Gyokko',alías:'',afiliacion:'Doce Lunas Demoniacas', familia:'', edad:'113(cronológicamente)', genero:'Masculino',especie:'Humano(Anteriormente) Demonio(Actualmente)', ocupacion:'Quinta Luna superior ',estilocombate:'Tecnica de Sangre Demoniaca', grupo:'Lunas superiores',imagen:'/personajes/gyokko.webp'},
     {id:42,nombre:'Kaigaku',alías:'',afiliacion:'Doce Lunas Demoniacas y cuerpo de exterminio de Demonios (anteriormente)', familia:'', edad:'', genero:'Masculino',especie:'Humano(Anteriormente) Demonio(Actualmente)', ocupacion:'sexta Luna superior ',estilocombate:'Tecnica de Sangre Demoniaca', grupo:'Lunas superiores',imagen:'/personajes/Kaigaku.jpg'}
 ];
+
+//#region
+app.use(
+    express.urlencoded({
+        extended:true
+    })
+)
+app.use(express.json({
+    type:"*/*"
+})
+)
+app.use(cors());
+
+//#endregion
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
+// Definición de la ruta para /api/personajes
+app.get('/api/personajes', (req, res) => {
+  res.send(personajes);
+});
+
+app.get('/personajes', (req, res) => {
+    const nombre = req.query.nombre;
+    let resultado = personajes;
+    if (nombre) {
+      resultado = personajes.filter(personaje =>
+        personaje.nombre.toLowerCase().includes(nombre.toLowerCase())
+      );
+    }
+    res.json(resultado);
+  });
+  
+
 app.get('/',(req,res)=>{
     res.send('Demon Slayer api');
 });
 app.get('/api/personajes',(req,res)=>{
     res.send(personajes);
 });
-app.get('/api/personajes/:id',(req,res)=>{
-    const personaje=personajes.find(c=>c.id===parseInt(req.params.id));
-    if(!personaje) return res.status(404).send(`Personaje no encontrado`);
-    else res.send(personaje);
-});
 
 app.post('/api/personajes/',(req,res)=>{
     const personaje={
         id:personajes.length+1,
         nombre:req.body.nombre,
-        ocupacion:req.body.ocupacion
     };
     personajes.push(personaje);
     res.send(personaje);
