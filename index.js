@@ -1,7 +1,10 @@
-const express = require('express')
-const cors =require('cors')
+const express = require('express');
+const cors =require('cors');
 
-const app = express()
+const app = express();
+
+const port = process.env.PORT || 5000;
+
 const personajes=[
     {id:1,nombre:'Kagaya Ubuyashiki',alías:'Oyakata-sama',afiliacion:'Cuerpo de Exterminio de Demonios', familia:'Ubuyashiki', edad:23, genero:'Masculino',especie:'Humano', ocupacion:'Lider del cuerpo de exterminio de demonios',estilocombate:'',imagen:'/personajes/Kagaya.webp'},
     {id:2,nombre:'Hinaki Ubuyashiki',alías:'',afiliacion:'Cuerpo de Exterminio de Demonios', familia:'Ubuyashiki', edad:8, genero:'Masculino',especie:'Humano', ocupacion:'',estilocombate:'',imagen:'/personajes/Hinaki.webp'},
@@ -52,11 +55,11 @@ app.use(
     express.urlencoded({
         extended:true
     })
-)
+);
 app.use(express.json({
     type:"*/*"
 })
-)
+);
 app.use(cors());
 
 //#endregion
@@ -109,5 +112,4 @@ app.delete('/api/personajes/:id',(req,res)=>{
 });
 
 
-const port = process.env.port || 8080;
 app.listen(port,()=>console.log(`Escuchando en el puerto ${port}...`));
