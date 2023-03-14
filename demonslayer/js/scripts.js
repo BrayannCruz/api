@@ -41,6 +41,9 @@ fetch(demonSlayerApi)
       } else {
         res.style.display="inline-block";
         const personaje = dataarray.find(item => item.nombre.toLowerCase().includes(txtInput.value));
+        if(!personaje){
+          const personaje = dataarray.find(item => item.alias.toLowerCase().includes(txtInput.value));
+        }
         if (personaje) {
           actualizarResultado(personaje);
         } else {
