@@ -1,4 +1,4 @@
-const demonSlayerApi = 'http://localhost:8080/api/personajes';
+const demonSlayerApi = 'https://api-production-c509.up.railway.app/api/personajes';
 const formulario = document.getElementById('buscapersonaje');
 const soloLetrasYNumeros = /^[a-zA-Z0-9\s]*$/; 
 const txtInput = document.getElementById("personaje");
